@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_asset_root" name="Nhập tài sản" sequence="10" web_icon="asset_purchase,static/description/icon.png"/>
+    <menuitem id="menu_asset_purchase_root" name="Mua sắm tài sản" parent="menu_asset_root" sequence="10"  />
+    <menuitem id="menu_asset_purchase_request" name="Đề xuất" parent="menu_asset_purchase_root" sequence="10"/>
+    <menuitem id="menu_asset_purchase_order" name="Mua hàng" parent="menu_asset_purchase_root" sequence="20"/>
+</odoo>

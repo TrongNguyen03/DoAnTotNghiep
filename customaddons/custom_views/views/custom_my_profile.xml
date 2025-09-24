@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_user_profile_view_customize" model="ir.ui.view">
+            <field name="name">res.user.profile.view.customize</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='coach_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_title']/h1/field[@name='name']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_parent_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit', '=', False)]}</attribute>
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_user_inherit_view_form" model="ir.ui.view">
+            <field name="name">res.user.inherit.view.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='hr_settings']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='public']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_user_form_simple_modif_inherit" model="ir.ui.view">
+            <field name="name">view.user.form.simple.modif.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='api_key_ids']/ancestor::group[1]" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_users_form_simple_modif_mail_inherit" model="ir.ui.view">
+            <field name="name">view.users.form.simple.modif.mail.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="mail.view_users_form_simple_modif_mail"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='notification_type']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_users_view_form_preferences_inherit" model="ir.ui.view">
+            <field name="name">res.users.view.form.preferences.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="mail_bot.res_users_view_form_preferences"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='odoobot_state']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

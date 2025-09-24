@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="asset_core.AssetListButtons"
+       t-inherit="web.ListView.Buttons"
+       t-inherit-mode="extension"
+       owl="1">
+        <xpath expr="//button[contains(@class, 'o_list_button_add')]" position="after">
+            <button type="button"
+                    class="btn btn-primary o_import_asset ms-2"
+                    t-on-click="onImportAsset"
+                    t-if="props.resModel === 'asset.asset'">
+                📥 Import Excel
+            </button>
+        </xpath>
+    </t>
+</templates>

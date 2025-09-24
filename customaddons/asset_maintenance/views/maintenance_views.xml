@@ -1,0 +1,73 @@
+<odoo>
+  <!-- Tree view -->
+  <record id="view_maintenance_tree" model="ir.ui.view">
+    <field name="name">asset.maintenance.tree</field>
+    <field name="model">asset.maintenance</field>
+    <field name="arch" type="xml">
+      <tree string="Yêu cầu bảo trì" decoration-info="state=='in_progress'" decoration-danger="state=='scrap'" decoration-success="state=='done'">
+        <field name="name" string="Tiêu đề"/>
+        <field name="asset_id" string="Tài sản"/>
+        <field name="request_date" string="Ngày yêu cầu"/>
+        <field name="requested_by" string="Người yêu cầu"/>
+        <field name="state" string="Trạng thái"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_maintenance_form" model="ir.ui.view">
+    <field name="name">asset.maintenance.form</field>
+    <field name="model">asset.maintenance</field>
+    <field name="arch" type="xml">
+      <form string="Chi tiết Yêu cầu bảo trì">
+        <sheet>
+          <group string="Thông tin chung">
+            <field name="name" string="Tiêu đề"/>
+            <field name="asset_id" string="Tài sản"
+                   attrs="{'readonly': [('id','!=',False)]}" options="{'no_create': True, 'no_edit': True}"/>
+            <field name="state" string="Trạng thái" widget="statusbar"
+                   statusbar_visible="draft,in_progress,done,scrap"/>
+          </group>
+
+          <group string="Người yêu cầu">
+            <field name="request_date" string="Ngày yêu cầu" readonly="1"/>
+            <field name="requested_by" string="Người yêu cầu" readonly="1"/>
+          </group>
+
+          <notebook>
+            <page string="Mô tả sự cố">
+              <field name="description" string="Mô tả" placeholder="Nhập mô tả chi tiết sự cố..."/>
+            </page>
+            <page string="Thông tin sửa chữa" attrs="{'invisible': [('state','=','draft')]}">
+              <field name="repair_note" string="Ghi chú sửa chữa"/>
+              <field name="completed_date" string="Ngày hoàn thành"/>
+            </page>
+          </notebook>
+          <div>
+          <button string="Bắt đầu sửa chữa" type="object" name="action_start"
+                  states="draft" class="btn-primary" groups="base.group_system,custom_views.group_maintenance_staff" />
+          <button string="Hoàn thành" type="object" name="action_done"
+                  states="in_progress" class="btn-success" groups="base.group_system,custom_views.group_maintenance_staff"/>
+          <button string="Hỏng" type="object" name="action_scrap"
+                  states="in_progress" class="btn-danger" groups="base.group_system,custom_views.group_maintenance_staff"/>
+          </div>
+        </sheet>
+
+      </form>
+
+    </field>
+  </record>
+
+  <!-- Action + Menu -->
+  <record id="action_asset_maintenance" model="ir.actions.act_window">
+    <field name="name">Yêu cầu bảo trì</field>
+    <field name="res_model">asset.maintenance</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_asset_maintenance"
+            name="Bảo trì"
+            parent="asset_core.menu_asset_root"
+            sequence="20"
+            action="action_asset_maintenance"/>
+</odoo>

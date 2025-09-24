@@ -1,0 +1,48 @@
+/* ----- Container card login ----- */
+.o_database_list {
+    max-width: 500px !important;  /* ghi đè chiều ngang mặc định */
+    width: 100% !important;
+}
+
+.card-body {
+    max-width: 500px; /* chiều ngang form */
+    width: 100%;
+    padding: 2rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    margin: 0 auto;
+}
+
+/* Logo */
+.card-body .text-center img {
+    max-height: 100px !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Input */
+.oe_login_form .form-control {
+    border: 1px solid #d0b3ff !important; /* viền tím nhạt */
+    border-radius: 0.5rem !important;
+    padding: 0.75rem 1rem !important;
+    transition: border-color 0.3s ease !important;
+}
+
+.oe_login_form .form-control:focus {
+    border-color: #7e57c2 !important; /* tím đậm khi focus */
+    box-shadow: 0 0 0 0.2rem rgba(126, 87, 194, 0.25) !important;
+}
+
+/* Button */
+.oe_login_form .btn-primary {
+    background-color: #7e57c2 !important; /* tím đậm */
+    border-color: #7e57c2 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    font-weight: 600 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.oe_login_form .btn-primary:hover {
+    background-color: #6a45a5 !important; /* tím tối hơn khi hover */
+}
+

@@ -1,0 +1,28 @@
+/* Ẩn "Tài liệu" */
+.o-dropdown--menu [data-menu="documentation"] {
+    display: none !important;
+}
+
+/* Ẩn "Hỗ trợ" */
+.o-dropdown--menu [data-menu="support"] {
+    display: none !important;
+}
+
+/* Ẩn "Phím tắt" */
+.o-dropdown--menu [data-menu="shortcuts"] {
+    display: none !important;
+}
+
+/* Ẩn "Tài khoản hệ thống" */
+.o-dropdown--menu [data-menu="account"] {
+    display: none !important;
+}
+/* Ẩn "Thông báo trong my profile" */
+.o_widget_notification_alert {
+    display: none !important;
+}
+
+
+
+
+

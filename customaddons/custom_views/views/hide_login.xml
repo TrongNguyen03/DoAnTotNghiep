@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Ẩn link "Bạn chưa có tài khoản?" -->
+        <template id="auth_signup_login_hide_links" inherit_id="auth_signup.login"
+                  name="Sign up - Reset Password">
+            <xpath expr="//a[@t-attf-href='/web/signup?{{ keep_query() }}']" position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+            <xpath expr="//a[@t-attf-href='/web/reset_password?{{ keep_query() }}']" position="attributes">
+                <attribute name="class">d-none</attribute>
+            </xpath>
+        </template>
+
+        <!-- Ẩn nút "Đăng nhập với quyền superuser" -->
+        <template id="web_login_hide_superuser_btn" inherit_id="web.login">
+            <xpath expr="//button[@name='redirect']" position="replace">
+                <t t-if="False"/>
+            </xpath>
+        </template>
+
+        <!-- Ẩn "Quản lý cơ sở dữ liệu" -->
+        <template id="web_login_hide_manage_db" inherit_id="web.login_layout" name="Hide Manage Databases Link">
+            <xpath expr="//a[@href='/web/database/manager']" position="replace"/>
+        </template>
+
+        <!-- Ẩn "Cung cấp bởi Odoo" -->
+        <template id="web_login_hide_powered_by" inherit_id="web.login_layout" name="Hide Powered By Odoo">
+            <xpath expr="//a[contains(@href,'https://www.odoo.com')]" position="replace"/>
+        </template>
+
+        <!-- Thay tiêu đề trang login -->
+        <template id="custom_login_title" inherit_id="web.layout">
+            <xpath expr="//head/title" position="replace">
+                <title>CTy TNNH NQT</title>
+            </xpath>
+        </template>
+         <template id="custom_login_favicon" inherit_id="web.layout">
+        <xpath expr="//head/link[@rel='shortcut icon']" position="replace">
+            <link rel="shortcut icon" type="image/x-icon" href="/custom_views/static/src/img/logo.png"/>
+        </xpath>
+    </template>
+    </data>
+</odoo>

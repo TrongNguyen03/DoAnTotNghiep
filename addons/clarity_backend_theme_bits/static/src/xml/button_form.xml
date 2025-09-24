@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.FormStatusIndicator" t-inherit-mode="extension" owl="1">
+
+        <xpath expr="//button[contains(@class, 'o_form_button_save')]/i" position="replace">
+            <t t-set="0"/>
+        </xpath>
+
+        <xpath expr="//button[contains(@class, 'o_form_button_save')]" position="inside">
+            <button type="button" class="btn btn-primary o_form_button_save" style="width: 80px; height: 30px;">
+                <span>Lưu</span>
+            </button>
+        </xpath>
+
+        <xpath expr="//button[contains(@class, 'o_form_button_cancel')]/i" position="replace">
+            <t t-set="0"/>
+        </xpath>
+
+        <xpath expr="//button[contains(@class, 'o_form_button_cancel')]" position="inside">
+            <button type="button" class="btn btn-secondary o_form_button_cancel" style="width: 80px; height: 30px;">
+                <span>Hủy</span>
+            </button>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.ListView.Buttons" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[contains(@class, 'o_list_button_add')]" position="replace">
+            <button type="button" class="btn btn-primary o_list_button_add" data-hotkey="c" t-on-click="onClickCreate"
+                    data-bounce-button="">
+                <i class="fa fa-plus"/>
+                Thêm mới
+            </button>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Kế thừa form profile của nhân viên -->
+        <record id="hr_employee_profile_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.profile.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <!-- không cho tạo sửa quản lý -->
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+                </xpath>
+
+                <!-- Ẩn người huấn luyện -->
+                <xpath expr="//field[@name='coach_id']" position="attributes" optional="True">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <!-- Ẩn tab thông tin riêng tư -->
+                <xpath expr="//page[@name='personal_information']" position="attributes" optional="True">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

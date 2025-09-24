@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nqt_group_catg" model="ir.module.category">
+        <field name="name">Nhóm quyền nqt</field>
+        <field name="sequence">1</field>
+    </record>
+    <!-- Quản lý tài sản – thuộc HCNS/Kho -->
+    <record id="group_asset_manager" model="res.groups">
+        <field name="name">Asset Manager</field>
+        <field name="category_id" ref="custom_views.nqt_group_catg"/>
+    </record>
+
+    <!-- Nhân viên sử dụng -->
+    <record id="group_employee_asset" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="custom_views.nqt_group_catg"/>
+    </record>
+
+    <!-- Nhân viên bảo trì (thừa hưởng Employee) -->
+    <record id="group_maintenance_staff" model="res.groups">
+        <field name="name">Maintenance Staff</field>
+        <field name="category_id" ref="custom_views.nqt_group_catg"/>
+        <field name="implied_ids" eval="[(4, ref('custom_views.group_employee_asset'))]"/>
+    </record>
+
+    <!-- Nhân viên mua hàng/kế toán (thừa hưởng Employee) -->
+    <record id="group_purchase_officer" model="res.groups">
+        <field name="name">Purchase Officer</field>
+        <field name="category_id" ref="custom_views.nqt_group_catg"/>
+        <field name="implied_ids" eval="[(4, ref('custom_views.group_employee_asset'))]"/>
+    </record>
+
+    <!-- Giám đốc/CEO -->
+    <record id="group_director_ceo" model="res.groups">
+        <field name="name">Director / CEO</field>
+        <field name="category_id" ref="custom_views.nqt_group_catg"/>
+    </record>
+</odoo>

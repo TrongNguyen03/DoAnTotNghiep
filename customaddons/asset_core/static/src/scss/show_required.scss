@@ -1,0 +1,32 @@
+.o_form_editable .o_required_modifier:before {
+    margin: 0 -10px;
+    content:"* ";
+    color: red;
+    position: absolute;
+}
+.asset-kanban-card {
+    padding: 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    background-color: #fff;
+    margin-bottom: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.asset-kanban-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+.asset-kanban-card strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.asset-kanban-card div {
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+}
+

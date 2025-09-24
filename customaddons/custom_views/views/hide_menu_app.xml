@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Menu Apps chỉ System Admin thấy -->
+        <menuitem id="base.menu_management"
+                  name="Apps"
+                  sequence="500"
+                  web_icon="base,static/description/modules.png"
+                  groups="base.group_system"/>
+    </data>
+</odoo>

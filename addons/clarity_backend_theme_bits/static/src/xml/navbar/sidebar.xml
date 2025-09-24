@@ -1,0 +1,120 @@
+<templates id="template" xml:space="preserve">
+
+	<t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension" owl="1">
+        <xpath expr="//Dropdown" position="replace">
+            <nav role="navigation" class="primary-nav menu o_main_navbar" data-command-category="disabled">
+                <div class="overflow-container">
+                    <ul id="menu-dropdown">
+                        <t t-foreach="menuService.getApps()" t-as="main_menu" t-key="main_menu.name">
+                            <li t-attf-class="menu-hasdropdown">
+                                <!-- Menu cha -->
+                                <a t-if="main_menu.children.length"
+                                   href="javascript:void(0);"
+                                   class="main_link dropdown-btn d-flex align-items-center"
+                                   data-bs-toggle="collapse"
+                                   t-attf-data-bs-target="#child_menu_{{main_menu.id}}"
+                                   t-att-data-menu="main_menu.id"
+                                   t-attf-data-action-model="{{main_menu.actionModel or ''}}"
+                                   t-attf-data-action-id="{{main_menu.actionID or ''}}"
+                                   t-att-data-menu-xmlid="main_menu.xmlid">
+                                    <span
+                                            t-att-class="{
+                                                'app_icon': true,
+                                                'me-2': true,
+                                                [main_menu.webIcon]: main_menu.webIcon
+                                            }"
+                                    />
+                                    <span t-attf-class="menu-title-text">
+                                        <t t-esc="main_menu.name"/>
+                                    </span>
+                                    <span class="fa fa-chevron-down ms-auto p-2" style="color: #757575;"/>
+                                </a>
+
+                                <a t-if="!main_menu.children.length"
+                                   t-attf-href="#menu_id={{main_menu.id}}&amp;action={{main_menu.actionID or ''}}"
+                                   t-att-data-menu="main_menu.id"
+                                   t-attf-data-action-model="{{main_menu.actionModel or ''}}"
+                                   t-attf-data-action-id="{{main_menu.actionID or ''}}"
+                                   t-att-data-menu-xmlid="main_menu.xmlid"
+                                   t-attf-class="main_link">
+                                    <span class="app_icon me-2"/>
+                                    <span t-attf-class="menu-title-text">
+                                        <t t-esc="main_menu.name"/>
+                                    </span>
+                                </a>
+
+
+                                <!-- Submenu -->
+                                <ul t-if="main_menu.children.length"
+                                    t-attf-id="child_menu_{{main_menu.id}}"
+                                    class="sub-menu-dropdown header-sub-menus collapse">
+                                    <t t-set="parent_menu_id" t-value="main_menu.id"/>
+                                    <t t-foreach="main_menu.children" t-as="menuid" t-key="menuid">
+                                        <t t-set="menu" t-value="menuService.getMenuAsTree(menuid)"/>
+                                        <t t-call="AllmenuRecursive"/>
+                                    </t>
+                                </ul>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </nav>
+        </xpath>
+    </t>
+
+
+    <t t-inherit="web.NavBar" t-inherit-mode="extension" owl="1">
+		<xpath expr="//t[@t-call='web.NavBar.AppsMenu']" position="replace">
+		</xpath>
+        <xpath expr="//t[@t-call='web.NavBar.SectionsMenu']" position="replace">
+        </xpath>
+        <xpath expr="//DropdownItem" position="after">
+            <div class="sidebar-toggler d-flex align-items-center">
+                <a href="javascript:;" class="sidebar-toggle-bits ms-1" t-on-click="toggleSidebar">
+                    <i class="fa fa-chevron-left sidebar-icon-toggle p-2"/>
+                </a>
+            </div>
+        </xpath>
+        <xpath expr="//DropdownItem" position="replace"/>
+	</t>
+
+    <t t-name="AllmenuRecursive" owl="1">
+        <li class="nav-item">
+            <t t-if="menu.childrenTree.length">
+                <a class="d-flex align-items-center w-100 sub-main-menu"
+                   style="cursor: pointer;"
+                   data-bs-toggle="collapse"
+                   t-attf-data-bs-target="#child_menu_{{menu.id}}"
+                   t-att-data-menu-xmlid="menu.xmlid"
+                   t-attf-class="d-flex align-items-center w-100 sub-main-menu {{ (menu.isActive) ? 'active' : '' }}">
+                    <span class="app_icon me-2"/>
+                    <span t-attf-class="menu-title-text">
+                        <t t-esc="menu.name"/>
+                    </span>
+                    <span class="fa fa-chevron-down ms-auto p-2" style="color: #757575;"/>
+                </a>
+                <div t-attf-id="child_menu_{{menu.id}}" class="collapse">
+                    <ul class="header-sub-menus">
+                        <t t-foreach="menu.children" t-as="menuid" t-key="menuid">
+                            <t t-set="menu" t-value="menuService.getMenuAsTree(menuid)"/>
+                            <t t-call="AllmenuRecursive"/>
+                        </t>
+                    </ul>
+                </div>
+            </t>
+            <t t-else="">
+                <a t-att-data-menu="menu.id"
+                   style="cursor: pointer;"
+                   t-attf-class="child_menus main_link {{ (menu.isActive) ? 'active' : '' }}"
+                   t-attf-href="#menu_id={{menu.id}}&amp;action={{menu.actionID ? menu.actionID : ''}}"
+                   t-att-data-menu-xmlid="menu.xmlid"
+                   t-attf-data-action-id="{{menu.actionID ? menu.actionID : ''}}">
+                    <span class="app_icon me-2"/>
+                    <span t-attf-class="menu-title-text">
+                        <t t-esc="menu.name"/>
+                    </span>
+                </a>
+            </t>
+        </li>
+    </t>
+</templates>

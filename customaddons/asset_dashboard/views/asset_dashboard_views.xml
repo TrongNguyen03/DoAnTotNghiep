@@ -1,0 +1,54 @@
+<odoo>
+    <menuitem id="menu_asset_dashboard_root" name="Báo cáo tài sản" web_icon="asset_dashboard,static/description/icon.png"/>
+
+    <!-- Biểu đồ -->
+    <record id="view_asset_report_graph" model="ir.ui.view">
+        <field name="name">asset.report.graph</field>
+        <field name="model">asset.report</field>
+        <field name="arch" type="xml">
+            <graph string="Báo cáo tài sản" type="bar" stacked="True" >
+                <!-- Các chỉ số -->
+                <field name="broken_ratio" type="measure"/>
+                <field name="total_purchase" type="measure"/>
+                <field name="allocation_avg" type="measure"/>
+                <field name="asset_count" type="measure"/>
+
+                <!-- Trục -->
+                <field name="year" type="row"/>
+                <field name="category_id" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot để phân tích sâu -->
+    <record id="view_asset_report_pivot" model="ir.ui.view">
+        <field name="name">asset.report.pivot</field>
+        <field name="model">asset.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Phân tích Tài sản">
+                <field name="year" type="row"/>
+                <field name="category_id" type="col"/>
+                <field name="employee_count" type="measure"/>
+                <field name="asset_count" type="measure"/>
+                <field name="total_purchase" type="measure"/>
+                <field name="allocation_count" type="measure"/>
+                <field name="allocation_avg" type="measure"/>
+                <field name="broken_count" type="measure"/>
+                <field name="broken_ratio" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_asset_report_graph" model="ir.actions.act_window">
+        <field name="name">Báo cáo Tài sản</field>
+        <field name="res_model">asset.report</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_asset_report_graph"
+              name="Phân tích và Biểu đồ"
+              parent="menu_asset_dashboard_root"
+              action="action_asset_report_graph"/>
+</odoo>
